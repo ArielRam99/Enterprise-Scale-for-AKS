@@ -1,0 +1,9 @@
+#admin_password = "change me"
+admin_username = "sysadmin"
+location="eastus"
+hub_prefix="escs-hub"
+source_address_prefix= "23.252.56.4"
+ssh_key_settings = {
+    username   = "sysadmin"
+    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDlno0XgimbmttOD9qDTdCTh+/16oaDCWkepqT+jkTw238d5Sc/+5LEEajXhur38pfofbWuN1Eorm1hMj5v7TBFa38hbhW1T2ovH/4nwTG1frL82UL/cjeCspT65vgpc4Rsv+y+O7yjaK7b8nXU0F512VDlDPVG1PNSyjJnSAwa8YcmU/3QNgKiwchW5xyN19mRIBPWBkXJGFUgY/w0lZNtoP/tPvXgMf6UntkM04nQOwOtvpO87cLDBmIG3fUNPBHpCoewE1Qpz4qfQz6Ns4wDen1Obb7pnFJwuJ7mp1KDPpeGY53wBW1gKlK+jvbVCLwegC4EwcEGAuDR8tXxpqgMZyXzesLlbWbIbj1zckOtsJ0tegE2O86ZM/1NRdT2XQF5LMle1o350uAO011LBNBj2ZVoCdxFZKxv2NN1g2FgJ1xt36enXYdRs0Yp6pb5+/x482thymAmepXj6/scjbMNs6t5pxYZj1dvSILZHaAqZsGLTSy9WVL68YkMf5wWYxIyX4LRzfsDLOHyjFDNwypcIlX0DWz0khguFe7ucAccexUu+b9kFnn3yq7DrzijVbypJbNFnrSSB/4PmWjsVkbqj4gxuxwIikt/EhgAfOP2w2LH1VoqL85bD6Te1P2W0Jj9Dgw1DetgBujFg+fnSsHvtrkU9LQZnKj1PJRMhQnrJw== ariel ramirez@DESKTOP-9QEAO5D"
+}

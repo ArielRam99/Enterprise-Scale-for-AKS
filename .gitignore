@@ -21,6 +21,6 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
-*.tfvars
+#*.tfvars
 *.hcl
 *.vs
