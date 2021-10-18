@@ -28,7 +28,7 @@ resource "azurerm_resource_group" "postgressql_rg" {
 }
 
 resource "azurerm_postgresql_server" "postgresql_server" {
-  name                = "postgresql"
+  name                = "postgresql-00000001"
   location            = azurerm_resource_group.postgressql_rg.location
   resource_group_name = azurerm_resource_group.postgressql_rg.name
 
