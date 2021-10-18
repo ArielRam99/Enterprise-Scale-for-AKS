@@ -1,26 +1,26 @@
-data "terraform_remote_state" "existing-lz" {
-  backend = "azurerm"
+#data "terraform_remote_state" "existing-lz" {
+#  backend = "azurerm"
+#
+#  config = {
+#    storage_account_name = var.state_sa_name
+#    container_name       = var.container_name
+#    key                  = "lz-net"
+#    access_key = var.access_key
+#  }
+#}
+#
+#data "terraform_remote_state" "existing-hub" {
+#  backend = "azurerm"
+#
+#  config = {
+#    storage_account_name = var.state_sa_name
+#    container_name       = var.container_name
+#    key                  = "hub-net"
+#    access_key = var.access_key
+#  }
+#}
 
-  config = {
-    storage_account_name = var.state_sa_name
-    container_name       = var.container_name
-    key                  = "lz-net"
-    access_key = var.access_key
-  }
-}
-
-data "terraform_remote_state" "existing-hub" {
-  backend = "azurerm"
-
-  config = {
-    storage_account_name = var.state_sa_name
-    container_name       = var.container_name
-    key                  = "hub-net"
-    access_key = var.access_key
-  }
-}
-
-data "azurerm_client_config" "current" {}
+#data "azurerm_client_config" "current" {}
 
 resource "azurerm_resource_group" "postgressql_rg" {
   name     = "postgressql-rg"
@@ -67,10 +67,10 @@ resource "azurerm_private_dns_zone" "postgressql_dns" {
 }
 
 # Needed for Jumpbox to resolve postgressql using a private endpoint and private dns zone
-resource "azurerm_private_dns_zone_virtual_network_link" "hub_aks" {
+resource "azurerm_private_dns_zone_virtual_network_link" "hub_postgressql" {
   name                  = "hub_to_postgressql"
   resource_group_name   = azurerm_resource_group.postgressql_rg.name
-  private_dns_zone_name = azurerm_private_dns_zone.postgressql-dns.name
+  private_dns_zone_name = azurerm_private_dns_zone.postgressql_dns.name
   virtual_network_id    = data.terraform_remote_state.existing-hub.outputs.hub_vnet_id
 }
 
@@ -80,10 +80,10 @@ resource "azurerm_role_assignment" "postgres-to-dnszone" {
   principal_id         = azurerm_user_assigned_identity.mi-aks-cp.principal_id
 }
 
-output "aks_private_zone_id" {
+output "postgressql_private_zone_id" {
   value = azurerm_private_dns_zone.postgressql_dns.id
 }
-output "aks_private_zone_name" {
+output "postgressql_private_zone_name" {
   value = azurerm_private_dns_zone.postgressql_dns.name
 }
 
