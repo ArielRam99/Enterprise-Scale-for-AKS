@@ -3,8 +3,10 @@ name: 'Terraform'
 on:
   push:
     branches:
-    - main
+    - [ main ]
   pull_request:
+    branches:
+    - [ main ]
 
 jobs:
   terraform:
@@ -14,6 +16,9 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUB_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      TFSTATE_RG: tfstate
+      STORAGEACCOUNTNAME: akstfstate002
+      CONTAINERNAME: akscs
       TF_VAR_admin_password: ${{ secrets.ADMIN_PASSWORD }}
       TF_VAR_access_key: ${{ secrets.ACCESS_KEY }}
     runs-on: ubuntu-latest
@@ -49,7 +54,7 @@ jobs:
       # On push to main, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply 04-Network-Hub
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+#      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       working-directory: ./Scenarios/AKS-Secure-Baseline-PrivateCluster/Terraform/04-Network-Hub
       run: terraform apply -auto-approve
 
@@ -65,7 +70,7 @@ jobs:
 
 
     - name: Terraform Apply 05-Network-LZ
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+#      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       working-directory: ./Scenarios/AKS-Secure-Baseline-PrivateCluster/Terraform/05-Network-LZ
       run: terraform apply -auto-approve
 
@@ -81,6 +86,6 @@ jobs:
 
 
     - name: Terraform Apply 06-AKS-supporting
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+#      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       working-directory: ./Scenarios/AKS-Secure-Baseline-PrivateCluster/Terraform/06-AKS-supporting
       run: terraform apply -auto-approve
