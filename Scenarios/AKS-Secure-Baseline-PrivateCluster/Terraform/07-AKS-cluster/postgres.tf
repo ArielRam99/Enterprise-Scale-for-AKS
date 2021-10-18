@@ -92,3 +92,7 @@ output "postgressql_private_zone_name" {
 variable "location" {
     default = "EastUS"
 }
+
+variable "postgressql_private_dns_zone_name" {
+    default = "privatelink.postgres.database.azure.com"
+}
