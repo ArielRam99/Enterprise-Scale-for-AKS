@@ -32,15 +32,15 @@
 #  location            = azurerm_resource_group.postgressql_rg.location
 #  resource_group_name = azurerm_resource_group.postgressql_rg.name
 #
-#  administrator_login          = "psqladmin"
-#  administrator_login_password = "H@Sh1CoR3!"
-#  auto_grow_enabled            = true
-#  backup_retention_days        = 7
-#  geo_redundant_backup_enabled = false
-#  sku_name                     = "GP_Gen5_2"
-#  ssl_enforcement_enabled      = true
-#  storage_mb                   = 51200
-#  version                      = "11"
+#  administrator_login          = var.administrator_login
+#  administrator_login_password = var.administrator_login_password
+#  auto_grow_enabled            = var.auto_grow_enabled
+#  backup_retention_days        = var.backup_retention_days
+#  geo_redundant_backup_enabled = var.geo_redundant_backup_enabled
+#  sku_name                     = var.sku_name
+#  ssl_enforcement_enabled      = var.ssl_enforcement_enabled
+#  storage_mb                   = var.storage_mb
+#  version                      = var.version
 #}
 #
 #resource "azurerm_private_endpoint" "postgressql_pe" {
@@ -95,4 +95,40 @@
 #
 #variable "postgressql_private_dns_zone_name" {
 #    default = "privatelink.postgres.database.azure.com"
+#}
+#
+#variable "administrator_login" {
+#    default = "psqladmin"
+#}
+#
+#variable "administrator_login_password" {
+#    default = "H@Sh1CoR3!"
+#}
+#
+#variable "auto_grow_enabled" {
+#    default = true
+#}
+#
+#variable "backup_retention_days" {
+#    default = 7
+#}
+#
+#variable "geo_redundant_backup_enabled" {
+#    default = false
+#}
+#
+#variable "sku_name" {
+#    default = "GP_Gen5_2"
+#}
+#
+#variable "ssl_enforcement_enabled" {
+#    default = true
+#}
+#
+#variable "storage_mb" {
+#    default = 51200
+#}
+#
+#variable "version" {
+#    default = "12"
 #}
