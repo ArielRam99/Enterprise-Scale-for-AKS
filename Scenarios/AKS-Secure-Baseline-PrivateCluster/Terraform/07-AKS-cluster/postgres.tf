@@ -40,7 +40,7 @@ resource "azurerm_postgresql_server" "postgresql_server" {
   sku_name                     = var.sku_name
   ssl_enforcement_enabled      = var.ssl_enforcement_enabled
   storage_mb                   = var.storage_mb
-  version                      = var.version
+  version                      = 11
 }
 
 resource "azurerm_private_endpoint" "postgressql_pe" {
@@ -127,8 +127,4 @@ variable "ssl_enforcement_enabled" {
 
 variable "storage_mb" {
     default = 51200
-}
-
-variable "version" {
-    default = "12"
 }
