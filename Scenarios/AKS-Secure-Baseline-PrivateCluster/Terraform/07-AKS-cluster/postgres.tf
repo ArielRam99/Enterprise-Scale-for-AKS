@@ -82,7 +82,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "lz_postgressql" {
 }
 
 resource "azurerm_private_dns_a_record" "a_record" {
-  name                = "test"
+  name                = azurerm_postgresql_server.postgresql_server.name
   zone_name           = azurerm_private_dns_zone.postgressql_dns.name
   resource_group_name = azurerm_resource_group.postgressql_rg.name
   ttl                 = 300
