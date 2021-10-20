@@ -74,6 +74,13 @@ resource "azurerm_private_dns_zone_virtual_network_link" "hub_postgressql" {
   virtual_network_id    = data.terraform_remote_state.existing-hub.outputs.hub_vnet_id
 }
 
+resource "azurerm_private_dns_zone_virtual_network_link" "lz_postgressql" {
+  name                  = "lz_to_postgressql"
+  resource_group_name   = azurerm_resource_group.postgressql_rg.name
+  private_dns_zone_name = azurerm_private_dns_zone.postgressql_dns.name
+  virtual_network_id    = data.terraform_remote_state.existing-lz.outputs.lz_vnet_id
+}
+
 resource "azurerm_role_assignment" "postgres-to-dnszone" {
   scope                = azurerm_private_dns_zone.postgressql_dns.id
   role_definition_name = "Private DNS Zone Contributor"
