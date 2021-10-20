@@ -86,7 +86,7 @@ resource "azurerm_private_dns_a_record" "a_record" {
   zone_name           = azurerm_private_dns_zone.postgressql_dns.name
   resource_group_name = azurerm_resource_group.postgressql_rg.name
   ttl                 = 300
-  records             = azurerm_private_endpoint.postgressql_pe.private_service_connection.private_ip_address
+  records             = [azurerm_private_endpoint.postgressql_pe.private_service_connection[4]]
 }
 
 resource "azurerm_role_assignment" "postgres-to-dnszone" {
