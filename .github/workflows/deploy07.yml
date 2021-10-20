@@ -2,11 +2,9 @@ name: 'Terraform'
 
 on:
   push:
-    branches:
-    - [ pause ]
+    branches: [ pause ]
   pull_request:
-    branches:
-    - [ main ]
+    branches: [ main ]
 
 jobs:
   terraform:
@@ -32,6 +30,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Connect to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.DEPLOYMENT_SP }}
+
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
@@ -47,11 +50,11 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan 07-AKS-cluster
       working-directory: ./Scenarios/AKS-Secure-Baseline-PrivateCluster/Terraform/07-AKS-cluster
-      run: terraform plan
+      run: terraform plan -input=false -var-file="terraform.tfvars"
 
       # On push to main, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply 07-AKS-cluster
 #      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       working-directory: ./Scenarios/AKS-Secure-Baseline-PrivateCluster/Terraform/07-AKS-cluster
-      run: terraform apply -auto-approve
+      run: terraform apply -input=false -var-file="terraform.tfvars" -auto-approve

@@ -2,11 +2,9 @@ name: 'Terraform'
 
 on:
   push:
-    branches:
-    - [ pause ]
+    branches: [ pause ]
   pull_request:
-    branches:
-    - [ main ]
+    branches: [ main ]
 
 jobs:
   terraform:
@@ -31,6 +29,11 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v2
+
+    - name: Connect to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.DEPLOYMENT_SP }}
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
